@@ -13,16 +13,29 @@ namespace Infrastructure.Data.Config
     {
         public void Configure(EntityTypeBuilder<Product> builder)
         {
-            //builder.Property(x=> x.Name).IsRequired();
-            builder.Property(x => x.Name).IsRequired().HasMaxLength(100);
+            // IsRequired() yazmasak da zorunlu olurdu (çünkü alan nullable değil)
+            builder.Property(x => x.Name)
+                .IsRequired()
+                .HasMaxLength(100);
 
-            builder.Property(x=>x.Price).IsRequired().HasPrecision(18,2);
+            // non-nullable olduğu için IsRequired gereksiz
+            builder.Property(x => x.Price)
+                .IsRequired()
+                .HasPrecision(18, 2);
 
-            builder.Property(x => x.PictureUri).IsRequired(false);
+            // nullable olduğu için yazmasanız da aynı olurdu
+            builder.Property(x => x.PictureUri)
+                .IsRequired(false);
 
-            builder.HasOne(x => x.Category).WithMany().HasForeignKey(x => x.CategoryId);
+            // aşağıdakiler de olmasa olur, çünkü Product sınıfında
+            // ef geleneğine uygun yazarak ilişkileri belirlemiştik.
+            builder.HasOne(x => x.Category)
+                .WithMany()
+                .HasForeignKey(x => x.CategoryId);
 
-            builder.HasOne(x => x.Brand).WithMany().HasForeignKey(x => x.BrandId);
+            builder.HasOne(x => x.Brand)
+                .WithMany()
+                .HasForeignKey(x => x.BrandId);
         }
     }
 }
