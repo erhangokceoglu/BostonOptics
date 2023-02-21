@@ -43,4 +43,10 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
 
+using (var scope =app.Services.CreateScope())
+{
+    var ShopContext = scope.ServiceProvider.GetRequiredService<ShopContext>();
+    await ShopContextSeed.SeedAsync(ShopContext);   
+}
+
 app.Run();
