@@ -11,11 +11,11 @@ namespace Infrastructure.Identity
 {
     public static class AppIdentityDbContextSeed
     {
-        public static async Task SeedAsync(AppIdentityDbContext db,RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager)
+        public static async Task SeedAsync(AppIdentityDbContext db, RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager)
         {
             await db.Database.MigrateAsync();
 
-            if(await roleManager.Roles.AnyAsync() || await userManager.Users.AnyAsync()) { return; }
+            if (await roleManager.Roles.AnyAsync() || await userManager.Users.AnyAsync()) { return; }
 
             await roleManager.CreateAsync(new IdentityRole(AuthorizationConstants.Roles.ADMINISTRATOR));
             var adminUser = new ApplicationUser()
@@ -24,7 +24,7 @@ namespace Infrastructure.Identity
                 UserName = AuthorizationConstants.DEFAULT_ADMIN_USER,
                 EmailConfirmed = true
             };
-            await userManager.CreateAsync(adminUser,AuthorizationConstants.DEFAULT_PASSWORD);
+            await userManager.CreateAsync(adminUser, AuthorizationConstants.DEFAULT_PASSWORD);
             await userManager.AddToRoleAsync(adminUser, AuthorizationConstants.Roles.ADMINISTRATOR);
 
             var demoUser = new ApplicationUser()

@@ -6,16 +6,17 @@ namespace Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IHomeViewModelService _homeViewModelService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IHomeViewModelService homeViewModelService)
         {
-            _logger = logger;
+            _homeViewModelService = homeViewModelService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index(int? categoryId, int? brandId)
         {
-            return View();
+            var vm = await _homeViewModelService.GetHomeViewModelAsync(categoryId, brandId);
+            return View(vm);
         }
 
         public IActionResult Privacy()

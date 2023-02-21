@@ -4,6 +4,8 @@ global using Microsoft.AspNetCore.Identity;
 global using Microsoft.EntityFrameworkCore;
 global using ApplicationCore.Interfaces;
 global using ApplicationCore.Entities;
+global using Web.Interfaces;
+global using Web.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,9 +13,10 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("AppIdentityDbContext");
 builder.Services.AddDbContext<AppIdentityDbContext>(options =>
     options.UseNpgsql(connectionString));
-builder.Services.AddDbContext<ShopContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("ShopContext"))); 
+builder.Services.AddDbContext<ShopContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("ShopContext")));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-builder.Services.AddScoped(typeof(IRepository<>),typeof(EFRepository<>));
+builder.Services.AddScoped(typeof(IRepository<>), typeof(EFRepository<>));
+builder.Services.AddScoped<IHomeViewModelService, HomeViewModelService>();
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true).AddRoles<IdentityRole>()
 .AddEntityFrameworkStores<AppIdentityDbContext>();
 builder.Services.AddControllersWithViews();
@@ -45,14 +48,14 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
 
-using (var scope =app.Services.CreateScope())
+using (var scope = app.Services.CreateScope())
 {
     var shopContext = scope.ServiceProvider.GetRequiredService<ShopContext>();
     var identityContext = scope.ServiceProvider.GetRequiredService<AppIdentityDbContext>();
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
     var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-    await ShopContextSeed.SeedAsync(shopContext);   
-    await AppIdentityDbContextSeed.SeedAsync(identityContext,roleManager, userManager); 
+    await ShopContextSeed.SeedAsync(shopContext);
+    await AppIdentityDbContextSeed.SeedAsync(identityContext, roleManager, userManager);
 }
 
 app.Run();
