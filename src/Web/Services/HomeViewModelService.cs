@@ -50,7 +50,7 @@ namespace Web.Services
 
         private async Task<List<SelectListItem>> GetCategoriesAsync()
         {
-            var categories = await _brandRepo.GetAllAsync();
+            var categories = await _categoryRepo.GetAllAsync();
             return categories.Select(x => new SelectListItem()
             {
                 Text = x.Name,
