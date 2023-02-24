@@ -21,7 +21,7 @@ namespace Web.Services
         {
             var specAllProducts = new ProductsFilterSpecification(categoryId, brandId);
             var countAll = await _productRepo.CountAsync(specAllProducts);
-            var specProducts =  new ProductsFilterSpecification(categoryId, brandId, (pageId-1) * Constants.ITEMS_PER_PAGE, Constants.ITEMS_PER_PAGE);
+            var specProducts = new ProductsFilterSpecification(categoryId, brandId, (pageId - 1) * Constants.ITEMS_PER_PAGE, Constants.ITEMS_PER_PAGE);
             var products = await _productRepo.GetAllAsync(specProducts);
             var vm = new HomeViewModel()
             {

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Services
 {
-    public class BasketService : IBasketServices
+    public class BasketService : IBasketService
     {
         private readonly IRepository<Basket> _basketRepo;
         private readonly IRepository<BasketItem> _basketItemRepo;

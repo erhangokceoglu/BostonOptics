@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Interfaces
 {
-    public interface IBasketServices
+    public interface IBasketService
     {
         Task<Basket> GetOrCreateBasketAsync(string buyerId);
 
