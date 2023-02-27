@@ -35,8 +35,14 @@ Install-Package Npgsql.EntityFrameworkCore.PostgreSQL -v 6.0.8
 Install-Package Microsoft.AspNetCore.Identity.EntityFrameworkCore -v 6.0.14
 ```
 ## Useful Links
+
+### Resources
+https://codepen.io/yigith/pen/PoOrWjX
+
 ### Documentation
 https://learn.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/ 
+
+https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/writeview=aspnetcore-6.0
 
 ### Github
 https://github.com/dotnet-architecture/eShopOnWeb 

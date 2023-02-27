@@ -24,6 +24,7 @@ namespace Web.Services
 
         public string BuyerId => UserId ?? AnonId ?? CreateAnonymousId();
 
+
         private string? _createdAnonId;
 
         private string CreateAnonymousId()
@@ -47,7 +48,30 @@ namespace Web.Services
         public async Task<BasketViewModel> GetBasketViewModelAsync()
         {
             var basket = await _basketService.GetOrCreateBasketAsync(BuyerId);
-            return basket.ToBasketViewModel();  
+            return basket.ToBasketViewModel();
+        }
+
+        public async Task EmptyBasketAsync()
+        {
+            await _basketService.EmptyBasketAsync(BuyerId);
+        }
+
+        public async Task DeleteBasketItemAsync(int productId)
+        {
+            await _basketService.DeleteBasketItemAsync(BuyerId, productId);
+        }
+
+        public async Task UpdateBasketAsync(Dictionary<int, int> quantities)
+        {
+            await _basketService.SetQuantities(BuyerId, quantities);
+        }
+
+        public async Task TransferBasketIfNecessary()
+        {
+            if (UserId != null && AnonId != null)
+            {
+                await _basketService.TransferBasketAsync(AnonId, UserId);
+            }
         }
     }
 }

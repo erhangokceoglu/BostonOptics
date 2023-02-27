@@ -33,3 +33,11 @@ body {
 .product-image:hover{
   transform: scale(1.2);
 }
+
+body {
+    padding: 3rem;
+}
+
+.number-input > .quantity {
+    width: 70px;
+}

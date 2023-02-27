@@ -7,6 +7,8 @@ global using ApplicationCore.Entities;
 global using Web.Interfaces;
 global using Web.Services;
 using ApplicationCore.Services;
+using Web.Middlewares;
+using Web.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -47,6 +49,8 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseTransferBasket();
 
 app.MapControllerRoute(
     name: "default",
