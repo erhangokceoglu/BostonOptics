@@ -39,6 +39,8 @@ Install-Package Microsoft.AspNetCore.Identity.EntityFrameworkCore -v 6.0.14
 ### Resources
 https://codepen.io/yigith/pen/PoOrWjX
 
+https://getbootstrap.com/docs/5.2/examples/checkout/
+
 ### Documentation
 https://learn.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/ 
 
