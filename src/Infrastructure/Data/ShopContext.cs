@@ -11,7 +11,10 @@ namespace Infrastructure.Data
 {
     public class ShopContext : DbContext
     {
-        public ShopContext(DbContextOptions<ShopContext> options): base(options) { }
+        public ShopContext(DbContextOptions<ShopContext> options): base(options) 
+        {
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+        }
 
         public DbSet<Category> Categories => Set<Category>();
 
