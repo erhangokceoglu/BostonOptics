@@ -34,6 +34,11 @@ Install-Package Microsoft.EntityFrameworkCore.Tools -v 6.0.14
 Install-Package Npgsql.EntityFrameworkCore.PostgreSQL -v 6.0.8
 Install-Package Microsoft.AspNetCore.Identity.EntityFrameworkCore -v 6.0.14
 ```
+## UnitTests
+```
+Install-Package Moq
+```
+
 ## Useful Links
 
 ### Resources
